@@ -19,7 +19,7 @@ margin: 100px;
 
 
 // main ("ROOT") component 
-export default class Root extends Component {
+export default class Root extends React.Component {
 
 
 // MAIN COMPONENT RENDER
