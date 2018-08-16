@@ -10,6 +10,9 @@ body {
 font-family: sans-serif;
 background: #f7f7f7;
 }
+img{
+  margin: 10px;
+}
 `
 
 // styled components
@@ -43,8 +46,10 @@ return (
 <Wrapper>
 
 {this.state.posts.map((item,i) => 
-  <div key={i}>
-    <img src={item.data.thumbnail} />
+  <div
+    style={{display: "flex", alignItems: "space-around"}} 
+    key={i}>
+    <img alt="patterns" src={item.data.thumbnail} />
     <p>{item.data.title}</p>
   </div>
 )}
