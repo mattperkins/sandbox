@@ -1,14 +1,19 @@
 {
-  "name": "dormshed-sandbox",
+  "name": "electron-react",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "electron-is-dev": "^0.3.0",
     "react": "16.4.0",
     "react-dom": "16.4.0",
     "styled-components": "3.3.2"
   },
   "devDependencies": {
-    "react-scripts": "1.1.4"
+    "concurrently": "^3.6.1",
+    "electron": "^2.0.7",
+    "electron-builder": "^20.28.1",
+    "react-scripts": "1.1.4",
+    "wait-on": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",

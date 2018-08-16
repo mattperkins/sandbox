@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 import registerServiceWorker from './registerServiceWorker'
 import styled, {injectGlobal} from 'styled-components'
-// import Syntax from './Syntax' 
 
 //eslint-disable-next-line
 injectGlobal`
@@ -31,7 +30,6 @@ return (
 <Wrapper>
 
 <h1>Hello, World!</h1>
-<p>Review Syntax.js where necessary</p>
 
 </Wrapper>
 
