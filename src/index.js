@@ -7,6 +7,7 @@ import Router from './Router'
 
 const electron  = window.require('electron')
 const ipcRenderer = electron.ipcRenderer
+const Menu = electron.remote.Menu
 
 //eslint-disable-next-line
 injectGlobal`
@@ -16,6 +17,9 @@ background: #f7f7f7;
 }
 img{
   margin: 10px;
+}
+div{
+  cursor: pointer;
 }
 `
 
@@ -31,6 +35,8 @@ export default class Root extends React.Component {
     posts: []
   }
 componentDidMount(){
+  this.initMenu()
+
   axios.get("https://www.reddit.com/r/patterns.json")
   .then(res => {
     this.setState({
@@ -41,9 +47,34 @@ componentDidMount(){
     console.log(err)
   })
 }
-showImage = () => {
-  ipcRenderer.send('toggle-image')
+showImage = image => {
+  ipcRenderer.send('toggle-image', image)
 }
+
+initMenu = () => {
+  const menu = Menu.buildFromTemplate([
+    {
+      label: 'File',
+      submenu: [
+        { label: "New Window" },
+        {
+          label: 'Settings',
+          accelerator: 'CmdOrCtrl+,',
+          click: () => {
+            ipcRenderer.send("toggle-settings")
+          } 
+        },
+        { type: 'separator'},
+        {
+          label: 'Quit',
+          accelerator: 'CmdOrCtrl+Q'
+        }
+      ]
+    }
+  ])
+  Menu.setApplicationMenu(menu)
+}
+
 // MAIN COMPONENT RENDER
 render() {
 
@@ -56,7 +87,7 @@ return (
   <div
     style={{display: "flex", alignItems: "space-around"}} 
     key={i}
-    onClick={() => this.showImage()}
+    onClick={() => this.showImage(item.data.preview.images[0].source.url)}
    >
     <img alt="patterns" src={item.data.thumbnail} />
     <p>{item.data.title}</p>
