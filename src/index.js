@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
 import registerServiceWorker from './registerServiceWorker'
 import styled, {injectGlobal} from 'styled-components'
@@ -23,7 +23,15 @@ export default class Root extends React.Component {
 
 // MAIN COMPONENT RENDER
 render() {
-
+this.componentDidMount(){
+  axios.get("https://www.reddit.com/r/patterns.json")
+  .then(res => {
+    console.log(res.data.data.children)
+  })
+  .catch(err => {
+    console.log(err)
+  })
+}
 // MAIN COMPONENT RETURN
 return (
 
