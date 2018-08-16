@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import registerServiceWorker from './registerServiceWorker'
 import styled, {injectGlobal} from 'styled-components'
 import axios from 'axios'
+import Router from './Router'
 
 //eslint-disable-next-line
 injectGlobal`
@@ -60,6 +61,6 @@ return (
 }// end render
 }// end component
 
-ReactDOM.render(<Root />, 
+ReactDOM.render(<Router />, 
   document.getElementById('root'))
   registerServiceWorker()

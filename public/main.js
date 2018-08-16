@@ -1,4 +1,5 @@
 const electron = require('electron')
+const ipcMain = electron.ipcMain
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 
@@ -11,10 +12,10 @@ let imageWindow
 
 function createWindow() {
   mainWindow = new BrowserWindow({width: 900, height: 680})
-  imageWindow = new BrowserWindow({width: 600, height: 600, parent: mainWindow, show: true})
+  imageWindow = new BrowserWindow({width: 600, height: 600, parent: mainWindow, show: false})
   
   mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`)
-  imageWindow.loadURL(isDev ? 'http://localhost:3000/imageWindow' : `file://${path.join(__dirname, '../build/index.html')}`)
+  imageWindow.loadURL(isDev ? 'http://localhost:3000/image' : `file://${path.join(__dirname, '../build/index.html')}`)
   
   mainWindow.on('closed', () => mainWindow = null);
 }
@@ -31,4 +32,8 @@ app.on('activate', () => {
   if (mainWindow === null) {
     createWindow()
   }
+})
+
+ipcMain.om('toggle-image', (event, arg) => {
+  imageWindow.show()
 })
