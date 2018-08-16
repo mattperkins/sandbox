@@ -5,6 +5,9 @@ import styled, {injectGlobal} from 'styled-components'
 import axios from 'axios'
 import Router from './Router'
 
+const electron  = window.require('electron')
+const ipcRenderer = electron.ipcRenderer
+
 //eslint-disable-next-line
 injectGlobal`
 body {
@@ -38,6 +41,9 @@ componentDidMount(){
     console.log(err)
   })
 }
+showImage = () => {
+  ipcRenderer.send('toggle-image')
+}
 // MAIN COMPONENT RENDER
 render() {
 
@@ -49,7 +55,9 @@ return (
 {this.state.posts.map((item,i) => 
   <div
     style={{display: "flex", alignItems: "space-around"}} 
-    key={i}>
+    key={i}
+    onClick={() => this.showImage()}
+   >
     <img alt="patterns" src={item.data.thumbnail} />
     <p>{item.data.title}</p>
   </div>

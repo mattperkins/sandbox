@@ -18,7 +18,14 @@ function createWindow() {
   imageWindow.loadURL(isDev ? 'http://localhost:3000/image' : `file://${path.join(__dirname, '../build/index.html')}`)
   
   mainWindow.on('closed', () => mainWindow = null);
-}
+
+imageWindow.on('close', (e) => {
+  e.preventDefault()
+  imageWindow.hide()
+})
+
+} // end createWindow function
+
 
 app.on('ready', createWindow)
 
@@ -34,6 +41,6 @@ app.on('activate', () => {
   }
 })
 
-ipcMain.om('toggle-image', (event, arg) => {
+ipcMain.on('toggle-image', (event, arg) => {
   imageWindow.show()
 })
