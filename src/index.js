@@ -56,7 +56,7 @@ initMenu = () => {
     {
       label: 'File',
       submenu: [
-        { label: "New Window" },
+        
         {
           label: 'Settings',
           accelerator: 'CmdOrCtrl+,',
